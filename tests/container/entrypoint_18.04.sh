@@ -18,6 +18,6 @@ ln -s ${SRC}/README.md ${TEST_ROOT}
 ln -s ${SRC}/LICENSE ${TEST_ROOT}
 
 cd ${TEST_ROOT}
-uv run --python python3 --no-managed-python coverage run -m pytest --junit-xml=${OUTPUT_DIR}/pytest.xml ${@:-}
-uv run --python python3 --no-managed-python coverage combine || true
-uv run --python python3 --no-managed-python coverage xml -o ${OUTPUT_DIR}/coverage.xml
+uv run --python python3.8 --no-managed-python coverage run -m pytest --junit-xml=${OUTPUT_DIR}/pytest.xml ${@:-}
+uv run --python python3.8 --no-managed-python coverage combine || true
+uv run --python python3.8 --no-managed-python coverage xml -o ${OUTPUT_DIR}/coverage.xml

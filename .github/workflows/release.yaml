@@ -47,28 +47,6 @@ jobs:
           path: dist/*
           if-no-files-found: error
 
-  publish-pypi:
-    name: publish to pypi
-    runs-on: ubuntu-latest
-    if: github.event_name == 'release'
-    needs: build-and-upload-artifacts
-    permissions:
-      id-token: write
-
-    steps:
-      - name: download build artifacts
-        uses: actions/download-artifact@v6
-        with:
-          name: build-and-upload-artifacts
-          path: dist
-
-      - run: rm dist/*.checksum
-
-      - name: publish to pypi
-        uses: pypa/gh-action-pypi-publish@v1.13.0
-        with:
-          skip-existing: true
-
   publish-release:
     name: publish to gh release
     runs-on: ubuntu-latest

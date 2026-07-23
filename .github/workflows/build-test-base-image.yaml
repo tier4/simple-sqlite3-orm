@@ -1,0 +1,48 @@
+name: Build test base image
+
+on:
+  workflow_dispatch:
+    inputs:
+      ubuntu_version:
+        description: "Ubuntu version to build the test base image for (e.g. 18.04, 20.04, 22.04, 24.04)"
+        required: true
+        type: string
+        default: "22.04"
+
+env:
+  IMAGE_NAME: ghcr.io/tier4/simple-sqlite3-orm/test_base
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push-test-base:
+    name: build test base image for ubuntu:${{ inputs.ubuntu_version }} and push to GHCR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push test base image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./tests/container
+          build-args: |
+            UBUNTU_BASE=ubuntu:${{ inputs.ubuntu_version }}
+          tags: ${{ env.IMAGE_NAME }}:ubuntu_${{ inputs.ubuntu_version }}
+          # keep the image a plain single-arch manifest without attestations,
+          # matching the manual build documented in tests/container/README.md
+          provenance: false
+          # zstd compression as documented in tests/container/README.md
+          outputs: type=image,push=true,compression=zstd,compression-level=19,oci-mediatypes=true,force-compression=true

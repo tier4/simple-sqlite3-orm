@@ -9,7 +9,8 @@ description = "A simple yet powerful SQLite3 ORM, powered by pydantic."
 readme = "README.md"
 license = "Apache-2.0"
 license-files = [ "LICENSE" ]
-authors = [ { name = "TIER IV, Inc." } ]
+authors = [ { name = "pga2rn", email = "aaronpigybd@gmail.com" } ]
+maintainers = [ { name = "TIER IV, Inc." } ]
 requires-python = ">=3.8"
 classifiers = [
   "License :: OSI Approved :: Apache Software License",

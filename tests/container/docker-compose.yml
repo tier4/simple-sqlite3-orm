@@ -8,6 +8,7 @@ services:
   tester-ubuntu-18.04:
     image: ghcr.io/tier4/simple-sqlite3-orm/test_base:ubuntu_18.04
     container_name: tester-ubuntu-18.04
+    entrypoint: /src/tests/container/entrypoint_18.04.sh
     <<: *_common
 
   tester-ubuntu-20.04:

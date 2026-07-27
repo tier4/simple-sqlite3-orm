@@ -34,7 +34,7 @@ urls.Tracker = "https://github.com/tier4/simple-sqlite3-orm/issues"
 dev = [
   "coverage>=7.6,<7.16",
   "pytest>=8.3,<9.2",
-  "pytest-asyncio>=0.24,<1.4",
+  "pytest-asyncio>=0.24,<1.5",
   "pytest-mock>=3.14,<3.15",
   "ruff>=0.6,<0.17",
 ]

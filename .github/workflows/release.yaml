@@ -5,7 +5,7 @@ on:
     types: [published]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-and-upload-artifacts:
@@ -15,10 +15,12 @@ jobs:
       contents: read
     steps:
       - name: checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
 
       - name: setup python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           # use the minimum py ver we support to generate the wheel
           python-version: 3.8
@@ -41,7 +43,7 @@ jobs:
             done
 
       - name: upload release artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: build-and-upload-artifacts
           path: dist/*
@@ -52,16 +54,18 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
     needs: build-and-upload-artifacts
+    permissions:
+      contents: write # upload assets to the release
 
     steps:
       - name: download build artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: build-and-upload-artifacts
           path: dist
 
       - name: upload artifacts to current release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
         with:
           files: |
             dist/*

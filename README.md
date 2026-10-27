@@ -3,8 +3,8 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tier4_simple-sqlite3-orm&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tier4_simple-sqlite3-orm)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=tier4_simple-sqlite3-orm&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=tier4_simple-sqlite3-orm)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=tier4_simple-sqlite3-orm&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=tier4_simple-sqlite3-orm)
-[![Supported Python version](https://img.shields.io/pypi/pyversions/simple-sqlite3-orm.svg)](https://pypi.org/project/simple-sqlite3-orm/)
-[![PyPI version](https://badge.fury.io/py/simple-sqlite3-orm.svg)](https://pypi.org/project/simple-sqlite3-orm/)
+[![Supported Python version](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Ftier4%2Fsimple-sqlite3-orm%2Fmain%2Fpyproject.toml)](https://github.com/tier4/simple-sqlite3-orm/blob/main/pyproject.toml)
+[![GitHub release](https://img.shields.io/github/v/release/tier4/simple-sqlite3-orm)](https://github.com/tier4/simple-sqlite3-orm/releases)
 
 A simple yet powerful SQLite3 ORM based on Python's sqlite3 DB engine, powered by pydantic.
 
@@ -34,8 +34,11 @@ Besides the sqlite3 natively supported python types,`simple-sqlite3-orm` also ad
 
 ## Installation
 
+This fork is released on [GitHub releases](https://github.com/tier4/simple-sqlite3-orm/releases), not on PyPI
+(`simple-sqlite3-orm` on PyPI is the upstream project). Install the wheel of the release you need:
+
 ```shell
-pip install simple-sqlite3-orm
+pip install "simple-sqlite3-orm @ https://github.com/tier4/simple-sqlite3-orm/releases/download/v0.13.2/simple_sqlite3_orm-0.13.2-py3-none-any.whl"
 ```
 
 `simple-sqlite3-orm` supports Python 3.8+.

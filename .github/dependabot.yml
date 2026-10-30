@@ -1,11 +1,26 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
+
 updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    # requirements.txt is a one-way export of uv.lock (see lock_file_management.yml).
+    # Without this exclusion Dependabot treats it as a manifest and bumps only its
+    # pins, leaving uv.lock (what CI and the release build actually use) untouched.
+    exclude-paths:
+      - "requirements.txt"
+      # a hand-kept copy of the dev dependency group in pyproject.toml, not read by anything
+      - "requirements-dev.txt"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 7
+    groups:
+      actions-all:
+        patterns: ["*"]
